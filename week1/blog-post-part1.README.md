@@ -5,7 +5,11 @@
 ## 1. Props: 컴포넌트 간 데이터 전달하기
 
 ### 1.1 Props란?
-Props는 'properties'의 줄임말로, React 컴포넌트 간에 데이터를 전달하는 방법입니다. 부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달할 때 사용하며, 단방향 데이터 흐름을 구현하는 React의 핵심 메커니즘입니다.
+
+- 'properties'의 줄임말
+- React 컴포넌트 간 데이터 전달 방법
+- 부모 → 자식 컴포넌트로 데이터 전달
+- React의 단방향 데이터 흐름 구현하는 핵심 메커니즘
 
 ### 1.2 기본 사용법
 
@@ -16,7 +20,7 @@ function Hello({ color, name }) {
 }
 
 Hello.defaultProps = {
-  name: "이름없음"
+  name: "이름없음",
 };
 
 // PropsExample.jsx
@@ -31,6 +35,7 @@ function PropsExample() {
 ```
 
 위 코드에서 볼 수 있는 주요 특징들:
+
 - 구조 분해 할당으로 props를 깔끔하게 받기
 - defaultProps로 기본값 설정
 - 여러 개의 props 한번에 전달하기
@@ -49,6 +54,7 @@ function Wrapper({ children }) {
 ```
 
 children props의 특징:
+
 - 컴포넌트 태그 사이의 내용을 받아올 수 있음
 - 레이아웃 컴포넌트 만들 때 유용
 - 컴포넌트 합성을 가능하게 함
@@ -56,6 +62,7 @@ children props의 특징:
 ### 1.4 Props 사용 시 주의사항
 
 1. **불변성 유지**
+
    ```jsx
    // ❌ 잘못된 예
    function Bad({ name }) {
@@ -65,18 +72,20 @@ children props의 특징:
    ```
 
 2. **객체 props 전달 시 주의**
+
    ```jsx
    // ❌ 안티패턴
-   <User info={{ name: "김철수" }} />  // 매 렌더링마다 새로운 객체
+   <User info={{ name: "김철수" }} />; // 매 렌더링마다 새로운 객체
 
    // ✅ 좋은 방법
    const userInfo = { name: "김철수" };
-   <User info={userInfo} />  // 동일한 객체 참조
+   <User info={userInfo} />; // 동일한 객체 참조
    ```
 
 ### 1.5 Props 관련 심화 개념
 
 1. **Props Drilling 문제**
+
    - 여러 컴포넌트를 거쳐 props를 전달할 때 발생
    - 해결 방법:
      - Context API 사용
@@ -84,16 +93,21 @@ children props의 특징:
      - 컴포넌트 구조 재설계
 
 2. **Props 타입 체크**
+
    ```jsx
-   import PropTypes from 'prop-types';
+   import PropTypes from "prop-types";
 
    function User({ name, age }) {
-     return <div>{name} ({age}세)</div>;
+     return (
+       <div>
+         {name} ({age}세)
+       </div>
+     );
    }
 
    User.propTypes = {
      name: PropTypes.string.isRequired,
-     age: PropTypes.number
+     age: PropTypes.number,
    };
    ```
 
@@ -113,6 +127,7 @@ children props의 특징:
 ### 1.6 Props 활용 베스트 프랙티스
 
 1. **적절한 네이밍**
+
    ```jsx
    // ❌ 모호한 이름
    <Button p="20px" c="blue" />
@@ -122,6 +137,7 @@ children props의 특징:
    ```
 
 2. **필요한 props만 전달**
+
    ```jsx
    // ❌ 불필요한 props 전달
    <UserProfile {...user} extra={something} />
